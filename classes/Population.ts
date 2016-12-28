@@ -1,5 +1,5 @@
 let chalk = require('chalk'); // Needed for colored output
-let fs = require('fs');
+let fs = require('fs'); // Needed for resume feature
 
 import { Creature } from './Creature';
 
@@ -60,22 +60,22 @@ export class Population {
         if (fs.existsSync("resume")) {
             let content: string[] = fs.readFileSync('resume', 'utf8').split("\r\n");
             for(let c of content) {
-                if(c.startsWith('generation:')) {
+                if(c.indexOf('generation:') >= 0) {
                     this.generation = Number(c.substr(11));
                     console.log("loaded generation = " + this.generation);
-                } else if(c.startsWith('target:')) {
+                } else if(c.indexOf('target:') >= 0) {
                     this.target = c.substr(7);
                     console.log("loaded target = " + this.target);
-                } else if(c.startsWith('mutationrate:')) {
+                } else if(c.indexOf('mutationrate:') >= 0) {
                     this.mutationrate = Number(c.substr(13));
                     console.log("loaded mutationrate = " + this.mutationrate);
-                } else if(c.startsWith('maxPopulation:')) {
+                } else if(c.indexOf('maxPopulation:') >= 0) {
                     this.maxPopulation = Number(c.substr(14));
                     console.log("loaded maxPopulation = " + this.maxPopulation);
-                } else if(c.startsWith('charPool:')) {
+                } else if(c.indexOf('charPool:') >= 0) {
                     this.charPool = c.substr(9).split('');
                     console.log("loaded charPool = " + c.substr(9));
-                } else if(c.startsWith('creature:')) {
+                } else if(c.indexOf('creature:') >= 0) {
                     this.population.push(new Creature(this.charPool, this.target.length, c.substr(9).split('')));
                     console.log("loaded creature = " + c.substr(9));
                 }
