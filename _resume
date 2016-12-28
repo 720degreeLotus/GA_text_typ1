@@ -1,0 +1,10 @@
+generation:5
+target:abba
+mutationrate:1
+maxPopulation:10
+charPool:abcde
+creature:aaaa
+creature:bbbb
+creature:aabb
+creature:bbaa
+creature:baab

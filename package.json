@@ -1,0 +1,19 @@
+{
+  "name": "ts_gen_evo_text",
+  "version": "1.0.0",
+  "description": "Genetic algorithm to evolve to a specific textphrase",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm install",
+    "prestart": "color 0f && node node_modules\\typescript\\bin\\tsc -p tsconfig.json && cls",
+    "start": "node main.js"
+  },
+  "author": "720degreeLotus",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^6.0.53",
+    "chalk": "^1.1.3",
+    "terminal-kit": "^0.26.0",
+    "typescript": "^2.1.4"
+  }
+}
