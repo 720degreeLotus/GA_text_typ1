@@ -10,7 +10,7 @@ The fitness/score is based on a predefined target-string. The more a string rese
 - Population-limit: `5000`
 - Charset: `abcdefghijklmnopqrstuvwxyz_?., `
 
-Config can be changed in main.ts and will be checked for errors on start (not if `allowImpossibleToFinish` is set to `TRUE`).
+Config can be changed in main.ts and will be checked for errors on start. If `allowImpossibleToFinish` is `FALSE` (default), the programm will throw an error and stop if the target-string can never be reached with the given charset.
 
 ### Usage
 The whole project is only tested in windows.
