@@ -1,7 +1,8 @@
 let chalk = require('chalk'); // Needed for colored output
 let fs = require('fs'); // Needed for resume feature
+let term = require( 'terminal-kit' ).terminal ; 
 
-import { Config } from './Config';
+// import { Config } from './Config';
 import { Creature } from './Creature';
 
 export class Population {
@@ -16,7 +17,7 @@ export class Population {
     public bestTarget: string;
     public charPool: string[] = [];
     
-    constructor(target: string, charPool, mutationRate: number, maxPopulation: number, init: boolean = false)
+    constructor(target: string, charPool: string[], mutationRate: number, maxPopulation: number, init: boolean = false)
     {
         this.target = target;
         this.mutationrate = mutationRate;
@@ -24,8 +25,8 @@ export class Population {
         this.maxPopulation = maxPopulation;
         this.charPool = charPool;
         if(init) {
-            if (this.resume() == true) {
-                // Do something
+            if (this.loadFromFile() == true) {
+                // Do something or nothing?
             } else {
                 this.generation = 0;
                 this.bestScore = 0;
@@ -57,28 +58,62 @@ export class Population {
         return s;
     }
 
-    resume(): boolean {
-        if (fs.existsSync("resume")) {
-            let content: string[] = fs.readFileSync('resume', 'utf8').split("\r\n");
+    saveToFile(): boolean {
+        //console.log("debug1");
+        //fs.writeFileSync('test2.txt', 'test');
+        //console.log("debug2");
+        
+        fs.unlinkSync('resume.txt');
+
+        fs.appendFileSync('resume.txt', 'target:' + this.target + '\r\n');
+        fs.appendFileSync('resume.txt', 'mutationrate:' + this.mutationrate + '\r\n');
+        fs.appendFileSync('resume.txt', 'maxPopulation:' + this.maxPopulation + '\r\n');
+        fs.appendFileSync('resume.txt', 'charPool:' + this.charPool.join('') + '\r\n');
+        fs.appendFileSync('resume.txt', 'generation:' + this.generation + '\r\n');
+        fs.appendFileSync('resume.txt', 'bestScore:' + this.bestScore + '\r\n');
+        fs.appendFileSync('resume.txt', 'bestTarget:' + this.bestTarget + '\r\n');
+
+        for(let c of this.population) {
+            fs.appendFileSync('resume.txt', 'creature:' + c.value.join('') + '\r\n');
+        }
+
+        //console.log("wait1");
+        //this.longExecFunc(() => { console.log('done!')}, 3); //5, 6 ... whatever. Higher -- longer
+        //console.log("wait2");
+        //process.exit();
+        return true;
+    }
+
+    loadFromFile(): boolean {
+        
+        if (fs.existsSync("resume.txt")) {
+            //console.log("loading...");
+            let content: string[] = fs.readFileSync('resume.txt', 'utf8').split("\r\n");
             for(let c of content) {
                 if(c.indexOf('generation:') >= 0) {
                     this.generation = Number(c.substr(11));
-                    console.log("loaded generation = " + this.generation);
+                    //console.log("loaded generation = " + this.generation);
                 } else if(c.indexOf('target:') >= 0) {
                     this.target = c.substr(7);
-                    console.log("loaded target = " + this.target);
+                    //console.log("loaded target = " + this.target);
                 } else if(c.indexOf('mutationrate:') >= 0) {
                     this.mutationrate = Number(c.substr(13));
-                    console.log("loaded mutationrate = " + this.mutationrate);
+                    //console.log("loaded mutationrate = " + this.mutationrate);
                 } else if(c.indexOf('maxPopulation:') >= 0) {
                     this.maxPopulation = Number(c.substr(14));
-                    console.log("loaded maxPopulation = " + this.maxPopulation);
+                    //console.log("loaded maxPopulation = " + this.maxPopulation);
                 } else if(c.indexOf('charPool:') >= 0) {
                     this.charPool = c.substr(9).split('');
-                    console.log("loaded charPool = " + c.substr(9));
+                    //console.log("loaded charPool = " + c.substr(9));
+                } else if(c.indexOf('bestScore:') >= 0) {
+                    this.bestScore = Number(c.substr(10));
+                    //console.log("loaded bestScore = " + c.substr(9));
+                } else if(c.indexOf('bestTarget:') >= 0) {
+                    this.bestTarget = c.substr(11);
+                    //console.log("loaded bestTarget = " + c.substr(9));
                 } else if(c.indexOf('creature:') >= 0) {
                     this.population.push(new Creature(this.charPool, this.target.length, c.substr(9).split('')));
-                    console.log("loaded creature = " + c.substr(9));
+                    //console.log("loaded creature = " + c.substr(9));
                 }
             }
             return true;
@@ -126,4 +161,14 @@ export class Population {
     getRandom(min, max) {
         return Math.floor(Math.random()*(max-min+1)+min);
     }
+
+    longExecFunc(callback, count) {
+
+    for (var j = 0; j < count; j++) {
+        for (var i = 1; i < (1 << 30); i++) {
+            var q = Math.sqrt(1 << 30);
+        }
+    }
+    callback();
+}
 }
