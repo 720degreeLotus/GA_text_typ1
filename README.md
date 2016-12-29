@@ -1,8 +1,8 @@
-# GA_text_typ1
+# Project: _GA_text_typ1_
 ### Description
 This small project is a genetic algorithm, which evolves a random text-string.
 
-The fitness/score is based on a predefined target-string. The more a string resembles the target-string, the better the score
+The fitness/score is based on a predefined target-string. The more a string resembles the target-string, the better the score.
 
 ### Config
 - Target-string: `project works just great`
@@ -10,13 +10,14 @@ The fitness/score is based on a predefined target-string. The more a string rese
 - Population-limit: `5000`
 - Charset: `abcdefghijklmnopqrstuvwxyz_?., `
 
-Config can be changed in main.ts
+Config can be changed in main.ts and will be checked for errors on start (not if `allowImpossibleToFinish` is set to `TRUE`).
 
 ### Usage
-- Requires "NodeJS" installed
-- Copy/Clone repository
-- open console/cmd
-- changedir to project folder
+The whole project is only tested in windows.
+- Requires `NodeJS` to be installed
+- Copy/Clone repository to harddrive
+- open cmd
+- change directory to project folder
 - run `npm install` to install all needed NPM modules
 - run `npm start` to compile and run project
 
