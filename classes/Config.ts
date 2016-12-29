@@ -6,6 +6,7 @@ export class Config {
     private _populationLimit: number;
     private _charSet: string[];
     private _allowImpossibleToFinish: boolean;
+    private _saveFile: string;
 
     constructor() {
         this._target = "a";
@@ -13,6 +14,7 @@ export class Config {
         this._populationLimit = 100;
         this._charSet = ["a"];
         this._allowImpossibleToFinish = false;
+        this._saveFile = "resume";
     }
 
     get target(): string {
@@ -53,6 +55,14 @@ export class Config {
 
     set allowImpossibleToFinish(v: boolean) {
         this._allowImpossibleToFinish = v;
+    }
+
+    get saveFile(): string {
+        return this._saveFile;
+    }
+
+    set saveFile(v: string) {
+        this._saveFile = v;
     }
 
 

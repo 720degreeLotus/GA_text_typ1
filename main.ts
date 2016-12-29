@@ -14,6 +14,7 @@ config.charSet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 config.populationLimit = 5000;
 config.allowImpossibleToFinish = false;
 
+
 if(config.validate() == false) {
     process.exit();
 }
@@ -80,10 +81,21 @@ while(validation == false) {
         myPopulation.fillMatePool();
         myPopulation.breedNewGeneration(config.charSet, config.mutationRate);
     }
+    // resume-test
+    if(myPopulation.generation >= 100) {
+        //myPopulation.save(config.saveFile);
+        process.exit();
+    }
    myPopulation.generation++;
 }
 
+saveToFile() {
+    // save config and population to file
+}
 
+loadFromFile() {
+    // load config and population from file
+}
 
 
 

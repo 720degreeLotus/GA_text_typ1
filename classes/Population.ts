@@ -1,6 +1,7 @@
 let chalk = require('chalk'); // Needed for colored output
 let fs = require('fs'); // Needed for resume feature
 
+import { Config } from './Config';
 import { Creature } from './Creature';
 
 export class Population {
