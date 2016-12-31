@@ -29,7 +29,7 @@ The whole project is only tested in windows.
 ### Features
 - resume-fature, which saves progress to harddrive
 - shows metadata on screen
-- shows prpgressbar
+- shows progressbar
 - validates config for errors or mistakes
 
 ### Screenshot
