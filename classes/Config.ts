@@ -6,7 +6,7 @@ export class Config {
     private _populationLimit: number;
     private _charSet: string[];
     private _allowImpossibleToFinish: boolean;
-    private _saveFile: string;
+    private _saveInterval: number;
 
     constructor() {
         this._target = "a";
@@ -14,7 +14,7 @@ export class Config {
         this._populationLimit = 100;
         this._charSet = ["a"];
         this._allowImpossibleToFinish = false;
-        this._saveFile = "resume";
+        this._saveInterval = 1000;
     }
 
     get target(): string {
@@ -57,15 +57,13 @@ export class Config {
         this._allowImpossibleToFinish = v;
     }
 
-    get saveFile(): string {
-        return this._saveFile;
+    get saveInterval(): number {
+        return this._saveInterval;
     }
 
-    set saveFile(v: string) {
-        this._saveFile = v;
+    set saveInterval(v: number) {
+        this._saveInterval = v;
     }
-
-
 
     public validate(): boolean {
         let result: boolean = true;
@@ -96,6 +94,10 @@ export class Config {
 
         if(this._populationLimit <= 0) {
             console.log(chalk.red.bold("Error") + " in Config: [" + chalk.cyan.bold("POPULATIONLIMIT") + "] is out of range (0-100 allowed)");
+            result = false;
+        }
+        if(this._saveInterval < 0) {
+            console.log(chalk.red.bold("Error") + " in Config: [" + chalk.cyan.bold("SAVEINTERVAL") + "] is out of range ( only >=1 allowed)");
             result = false;
         }
         if(result == false) {

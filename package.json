@@ -4,9 +4,9 @@
   "description": "Genetic algorithm to evolve to a specific textphrase",
   "main": "main.js",
   "scripts": {
-    "test": "npm install",
-    "prestart": "color 0f && node node_modules\\typescript\\bin\\tsc -p tsconfig.json && cls",
-    "start": "node main.js"
+    "test": "color 0f && node node_modules\\typescript\\bin\\tsc -p tsconfig.json",
+    "prestart": "color 0f && cls && echo Compiling... && node node_modules\\typescript\\bin\\tsc -p tsconfig.json",
+    "start": "cls && node main.js"
   },
   "author": "720degreeLotus",
   "license": "ISC",
